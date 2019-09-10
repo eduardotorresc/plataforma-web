@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "gulp",
+    "pug": "gulp devPug",
+    "sass": "gulp devSass",
+    "js": "gulp devJavascript",
+    "dev": "gulp dev",
+    "build": "gulp build"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",

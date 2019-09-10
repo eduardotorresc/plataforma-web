@@ -26,27 +26,49 @@ const paths = {
   },
 }
 
-function pages() {
+function devPug() {
   return src(paths.pages.src)
     .pipe(pug({
       pretty: true
     }))
+    .pipe(pug())
     .pipe(dest(paths.pages.dest))
 }
 
-function styles() {
+function devSass() {
   return src(paths.styles.src)
     .pipe(sass({
       outputStyle: 'expanded'
     }))
     .on("error", sass.logError)
     .pipe(autoprefixer())
-    // .pipe(minifycss())
     .pipe(dest(paths.styles.dest))
     .pipe(browserSync.stream());
 }
 
-function scripts() {
+function devJs() {
+  return src(paths.scripts.src)
+    .pipe(concat('script.js'))
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(dest(paths.scripts.dest))
+}
+
+function buildPug() {
+  return src(paths.pages.src)
+    .pipe(pug())
+    .pipe(dest(paths.pages.dest))
+}
+
+function buildSass() {
+  return src(paths.styles.src)
+    .pipe(sass())
+    .pipe(minifycss())
+    .pipe(dest(paths.styles.dest))
+}
+
+function buildJs() {
   return src(paths.scripts.src)
     .pipe(concat('script.js'))
     .pipe(babel({
@@ -56,7 +78,7 @@ function scripts() {
     .pipe(dest(paths.scripts.dest))
 }
 
-function browser() {
+function serve() {
   browserSync.init({
     server: {
       baseDir: "./public"
@@ -64,12 +86,32 @@ function browser() {
   })
 }
 
-watch(paths.pages.watch, pages).on('change', browserSync.reload)
-watch(paths.styles.watch, styles)
-watch(paths.scripts.watch, scripts).on('change', browserSync.reload)
+function watchPug() {
+  watch(paths.pages.watch, devPug)
+    .on('change', browserSync.reload)
+}
+function watchSass() {
+  watch(paths.styles.watch, devSass)
+}
+function watchJs() {
+  watch(paths.scripts.watch, devJs)
+    .on('change', browserSync.reload)
+}
 
-exports.styles = styles
-exports.pages = pages
-exports.scripts = scripts
-exports.browser = browser
-exports.default = parallel(pages, styles, scripts, browser)
+function copy() {
+  return src('src/assets/**')
+    .pipe(dest('public/assets/'))
+}
+
+exports.devPug          = devPug
+exports.devSass         = devSass
+exports.devJs           = devJs
+exports.serve           = serve
+exports.copy            = copy
+exports.watchPug        = watchPug
+exports.watchSass       = watchSass
+exports.watchJs         = watchJs
+exports.watchAll        = parallel(watchPug, watchSass, watchJs)
+exports.dev             = parallel(devPug, devSass, devJs)
+exports.build           = parallel(buildPug, buildSass, buildJs, copy)
+exports.default         = parallel(serve, this.dev, this.watchAll, copy)
