@@ -49,9 +49,7 @@ function devSass() {
 function devJs() {
   return src(paths.scripts.src)
     .pipe(concat('script.js'))
-    .pipe(babel({
-      presets: ['@babel/env']
-    }))
+    .pipe(babel())
     .pipe(dest(paths.scripts.dest))
 }
 
@@ -103,15 +101,15 @@ function copy() {
     .pipe(dest('public/assets/'))
 }
 
-exports.devPug          = devPug
-exports.devSass         = devSass
-exports.devJs           = devJs
-exports.serve           = serve
-exports.copy            = copy
-exports.watchPug        = watchPug
-exports.watchSass       = watchSass
-exports.watchJs         = watchJs
-exports.watchAll        = parallel(watchPug, watchSass, watchJs)
-exports.dev             = parallel(devPug, devSass, devJs)
-exports.build           = parallel(buildPug, buildSass, buildJs, copy)
-exports.default         = parallel(serve, this.dev, this.watchAll, copy)
+exports.devPug    = devPug
+exports.devSass   = devSass
+exports.devJs     = devJs
+exports.serve     = serve
+exports.copy      = copy
+exports.watchPug  = watchPug
+exports.watchSass = watchSass
+exports.watchJs   = watchJs
+exports.watchAll  = parallel(watchPug, watchSass, watchJs)
+exports.dev       = parallel(devPug, devSass, devJs)
+exports.build     = parallel(buildPug, buildSass, buildJs, copy)
+exports.default   = parallel(serve, this.dev, this.watchAll, copy)
