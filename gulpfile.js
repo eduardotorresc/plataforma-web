@@ -1,4 +1,9 @@
-const { watch, src, dest, parallel } = require('gulp')
+const {
+  watch,
+  src,
+  dest,
+  parallel
+} = require('gulp')
 const pug = require('gulp-pug')
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
@@ -10,7 +15,7 @@ const browserSync = require('browser-sync').create()
 
 const paths = {
   pages: {
-    src: 'src/pug/*.pug',
+    src: 'src/pug/pages/**/*.pug',
     watch: 'src/pug/**/*.pug',
     dest: 'public'
   },
@@ -88,9 +93,11 @@ function watchPug() {
   watch(paths.pages.watch, devPug)
     .on('change', browserSync.reload)
 }
+
 function watchSass() {
   watch(paths.styles.watch, devSass)
 }
+
 function watchJs() {
   watch(paths.scripts.watch, devJs)
     .on('change', browserSync.reload)
@@ -101,15 +108,15 @@ function copy() {
     .pipe(dest('public/assets/'))
 }
 
-exports.devPug    = devPug
-exports.devSass   = devSass
-exports.devJs     = devJs
-exports.serve     = serve
-exports.copy      = copy
-exports.watchPug  = watchPug
+exports.devPug = devPug
+exports.devSass = devSass
+exports.devJs = devJs
+exports.serve = serve
+exports.copy = copy
+exports.watchPug = watchPug
 exports.watchSass = watchSass
-exports.watchJs   = watchJs
-exports.watchAll  = parallel(watchPug, watchSass, watchJs)
-exports.dev       = parallel(devPug, devSass, devJs)
-exports.build     = parallel(buildPug, buildSass, buildJs, copy)
-exports.default   = parallel(serve, this.dev, this.watchAll, copy)
+exports.watchJs = watchJs
+exports.watchAll = parallel(watchPug, watchSass, watchJs)
+exports.dev = parallel(devPug, devSass, devJs)
+exports.build = parallel(buildPug, buildSass, buildJs, copy)
+exports.default = parallel(serve, this.dev, this.watchAll, copy)
