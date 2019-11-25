@@ -2,9 +2,8 @@ extends ../../template/template
 
 block content
   h2 Open Source
-  include ../../config/config
-    each openSource in openSources
-      .software
-        img(src=openSource.img, alt=openSource.name).software__img
-        h3.software__name= openSource.name
-        a(href=openSource.url).software__button.button.primary Ver más
+  each openSource in openSources
+    .software
+      img(src=`${openSource.img}`, alt=`${openSource.name}`).software__img
+      h3.software__name #{openSource.name}
+      a(href=`${openSource.url}`).software__button.button.primary Ver más
