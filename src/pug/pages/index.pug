@@ -2,17 +2,16 @@ extends ../template/template
 
 block banner
   .banner
-    img(src="/assets/img/banner.jpg", alt="Banner").banner__img
+    img(src=`${path}assets/img/banner.jpg`, alt="Banner").banner__img
     .banner__content
       h3.mark Plataforma web educativa
       p.banner__content__paragraph Software Libre y Open Source
-      a(href="/nosotros/").button.primary Ver más
+      a(href=`${path}nosotros/`).button.primary Ver más
 
 block content
   h2 Software Libre y Open Source
-  include ../config/config
-    each software in softwares
-      .software
-        img(src=software.img, alt=software.name)
-        h3.software__name= software.name
-        a(href=software.url).software__button.button.primary Ver más
+  each software in softwares
+    .software
+      img(src=`${software.img}`, alt=`${software.name}`)
+      h3.software__name #{software.name}
+      a(href=`${software.url}`).software__button.button.primary Ver más

@@ -2,10 +2,9 @@ extends ../../template/template
 
 block content
   h2 Artículo
-
   .article-container
     .article.flexbox
-      img(src="assets/img/code.jpg", alt="Software").article__img
+      img(src=`${path}assets/img/code.jpg`, alt="Software").article__img
       .article__content
         h3 Visual Studio Code
         p Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.  Visual Studio Code is free and available on your favorite platform - Linux, macOS, and Windows.
@@ -14,10 +13,10 @@ block content
         p categoria:
           a(href="#").category Editor de código
     .galery
-      img(src="assets/img/code.jpg", alt="").galery__img
-      img(src="assets/img/code.jpg", alt="").galery__img
-      img(src="assets/img/code.jpg", alt="").galery__img
-      img(src="assets/img/code.jpg", alt="").galery__img
+      img(src=`${path}assets/img/code.jpg`, alt="").galery__img
+      img(src=`${path}assets/img/code.jpg`, alt="").galery__img
+      img(src=`${path}assets/img/code.jpg`, alt="").galery__img
+      img(src=`${path}assets/img/code.jpg`, alt="").galery__img
 
   .tabs-comtainer
     ul.tabs#tabs

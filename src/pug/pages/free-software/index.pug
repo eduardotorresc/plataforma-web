@@ -2,9 +2,8 @@ extends ../../template/template
 
 block content
   h2 Software Libre
-  include ../../config/config
-    each freeSoftware in freeSoftwares
-      .software
-        img(src=freeSoftware.img, alt=freeSoftware.name).software__img
-        h3.software__name= freeSoftware.name
-        a(href=freeSoftware.url).software__button.button.primary Ver más
+  each freeSoftware in freeSoftwares
+    .software
+      img(src=`${freeSoftware.img}`, alt=`${freeSoftware.name}`).software__img
+      h3.software__name #{freeSoftware.name}
+      a(href=`${freeSoftware.url}`).software__button.button.primary Ver más

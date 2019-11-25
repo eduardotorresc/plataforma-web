@@ -1,11 +1,14 @@
+//- - var path = "/";
+
 #toggle-menu.icon-menu.toggle-menu
+
 nav#nav.main-nav
-    ul.main-menu
-      li.main-menu__item
-        a(href="/").main-menu__link Inicio
-      li.main-menu__item
-        a(href="/nosotros/").main-menu__link Nosotros
-      li.main-menu__item
-        a(href="/free-software/").main-menu__link Software Libre
-      li.main-menu__item
-        a(href="/open-source/").main-menu__link Open Source
+  ul.main-menu
+    li.main-menu__item
+    a(href=`${path}`).main-menu__link Inicio
+    li.main-menu__item
+      a(href=`${path}nosotros/`).main-menu__link Nosotros
+    li.main-menu__item
+      a(href=`${path}free-software/`).main-menu__link Software Libre
+    li.main-menu__item
+      a(href=`${path}open-source/`).main-menu__link Open Source
